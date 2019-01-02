@@ -7,12 +7,13 @@
 * vue-router
 * axios
 * webpack4
-* Element
-* V-charts
+* element
+* v-charts
 * echarts
 * eslint
 * sentry
 * cdn
+* sentry
 
 > 实现功能
 
