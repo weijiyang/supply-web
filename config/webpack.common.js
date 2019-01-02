@@ -2,36 +2,42 @@
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const htmlWebpackPlugin = require('html-webpack-plugin')
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-
+const vueLoaderConfig = require('./vue-loader.config')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const utils = require('./utils')
+const package = require('../package')
+function resolve (dir) {
+  return path.posix.join(__dirname, '..', dir)
+}
+process.env.PROJECT = package.project
 module.exports = {
     entry: {
-      app: path.join(__dirname, "/app/views/app.js")
+      app: path.resolve(__dirname, "../web", process.env.PROJECT, "pages/app.js")
     },
     output: {
-      path: path.join(__dirname, "/build"),
+      path: path.resolve(__dirname, "../build", process.env.PROJECT, "js"),
       filename: "[name].build.js",
-      publicPath: '/build',
+      publicPath: process.env.NODE_ENV === 'production'
+      ? 'http://yunshanmeicai.com/' : '/',
     },
     resolve: {
-      extensions: ['.js', '.vue'],
+      extensions: ['.js', '.vue', '.json'],
       alias: {
         'vue$': 'vue/dist/vue.esm.js',
-        '@': __dirname
+        '@': path.resolve(__dirname, "../web", process.env.PROJECT)
       }
     },
     module: {
       rules: [
         {
           test: /\.vue$/,
-          loader: 'vue-loader'
+          loader: 'vue-loader',
+          options: vueLoaderConfig
         },
         {
           test: /\.js$/,
           loader: 'babel-loader',
-          options: {
-            plugins: ['syntax-dynamic-import']
-          }
+          include: [resolve('pages')]
         },
         {
           test: /\.css$/,
@@ -43,27 +49,64 @@ module.exports = {
         },
         {
           test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-          loader: 'url-loader'
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            name: utils.assetsPath('img/[name].[hash:7].[ext]')
+          }
         },
         {
           test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-          loader: 'url-loader'
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            name: utils.assetsPath('media/[name].[hash:7].[ext]')
+          }
         },
         {
           test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-          loader: 'url-loader'
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+          }
         }
       ]
     },
     performance: {
       hints: false
     },
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          test: {
+            name: 'async',
+            chunks: "async"
+          },
+          initial: {
+            chunks: "initial",
+            filename: "initial.bundle.js"
+          },
+          vender: {
+            chunks: "all",
+            test: /[\\/]node_modules[\\/]/,
+            filename: 'vender.bundle.js'
+          }
+        }
+      },
+      runtimeChunk: {
+        name: "manifest"
+      }
+  },
     plugins: [
       new VueLoaderPlugin(),
-      new CleanWebpackPlugin('build/*.*'),
+      new CleanWebpackPlugin('build/*',{
+        root: path.resolve(__dirname, '../')
+      }),
       new htmlWebpackPlugin({
-        filename: 'main.html',
-        template: 'index.html',
+        filename: process.env.NODE_ENV === 'production' ? '../../../index.html' : 'index.html',
+
+        template: 'template.html',
         inject: true
       })
     ]

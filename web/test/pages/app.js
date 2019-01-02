@@ -1,4 +1,3 @@
-import jquery from 'jquery'
 import Vue from 'vue'
 import VCharts from 'v-charts'
 import router from './router.js'

@@ -1,7 +1,6 @@
 <template>
     <div>
-        <img src="@/app/src/webpack.png" alt="error"/>
-        <!-- <button class="btn" style="width:100%;height:40px;margin-bottom:20px;">jquery</button> -->
+        <img src="@/src/webpack.png" alt="error"/>
         <el-button type="success" style="width:100%;" @click="centerDialogVisible = true">{{vueName}}</el-button>
         <el-dialog
             title="提示"
@@ -17,7 +16,6 @@
     </div>
 </template>
 <script>
-import $ from 'jquery'
 export default {
     name: 'App',
     data () {
@@ -25,11 +23,6 @@ export default {
         vueName: "hello webpack",
         centerDialogVisible: false
       }
-    },
-    mounted () {
-        $('.btn').click(function(){
-            alert("jquery 调用成功")
-        })
     }
 }
 </script>
