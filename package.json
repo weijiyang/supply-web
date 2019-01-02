@@ -1,0 +1,28 @@
+{
+  "name": "supply-web",
+  "version": "1.0.0",
+  "description": "supply chain' web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env NODE_ENV=development webpack --config config/webpack.dev.js --hide-modules",
+    "dev": "webpack-dev-server --inline --hot --progress --open --quiet --config config/webpack.dev.js",
+    "dll": "webpack --config config/webpack.dll.js",
+    "build": "webpack --config config/webpack.pro.js --hide-modules",
+    "op": "webpack --config config/webpack.optimization.js --hide-modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weijiyang/supply-web.git"
+  },
+  "author": "糖灬少",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/weijiyang/supply-web/issues"
+  },
+  "homepage": "https://github.com/weijiyang/supply-web#readme",
+  "dependencies": {
+    "vue": "^2.5.21",
+    "webpack": "^4.28.3"
+  }
+}
