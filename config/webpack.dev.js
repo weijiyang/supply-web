@@ -43,10 +43,10 @@ module.exports = merge(common, {
         // inline: true
     },
     plugins: [
-        new webpack.DllReferencePlugin({
-            context: path.resolve(__dirname, "./dll"),
-            manifest: require(path.resolve(__dirname,'./dll',"vender-manifest.json"))
-        }),
+        // new webpack.DllReferencePlugin({
+        //     context: path.resolve(__dirname, "./dll"),
+        //     manifest: require(path.resolve(__dirname,'./dll',"vender-manifest.json"))
+        // }),
         // new webpack.HotModuleReplacementPlugin()
     ]
 });
