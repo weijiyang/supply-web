@@ -12,7 +12,8 @@ export default new Router({
     {
       path: '/webpack',
       name: 'webpack',
-      component: () => import(/* webpackChunkName: "vue-webpack-ui" */ '@/pages/webpack.vue')
+      // component: () => import (/* webpackChunkName: "vue-webpack-ui" */ '@/pages/webpack.vue')
+      component: resolve => require.ensure([], () => resolve(require('@/pages/webpack.vue').default), 'webpack')
     },
     {
       path: '/async',

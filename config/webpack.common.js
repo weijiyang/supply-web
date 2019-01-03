@@ -9,6 +9,16 @@ const package = require('../package')
 function resolve (dir) {
   return path.posix.join(__dirname, '..', dir)
 }
+const createLintingRule = () => ({
+  test: /\.(js|vue)$/,
+  loader: 'eslint-loader',
+  enforce: 'pre',
+  include: [path.posix.join(__dirname, '../web')],
+  options: {
+    formatter: require('eslint-friendly-formatter'),
+    emitWarning: false
+  }
+})
 process.env.PROJECT = package.project
 module.exports = {
     entry: {
@@ -29,6 +39,7 @@ module.exports = {
     },
     module: {
       rules: [
+        ...(process.env.Node_ENV === 'development' ? [createLintingRule()] : []),
         {
           test: /\.vue$/,
           loader: 'vue-loader',
@@ -37,7 +48,7 @@ module.exports = {
         {
           test: /\.js$/,
           loader: 'babel-loader',
-          include: [resolve('pages')]
+          include: [resolve('web')]
         },
         {
           test: /\.css$/,
@@ -105,7 +116,6 @@ module.exports = {
       }),
       new htmlWebpackPlugin({
         filename: process.env.NODE_ENV === 'production' ? '../../../index.html' : 'index.html',
-
         template: 'template.html',
         inject: true
       })

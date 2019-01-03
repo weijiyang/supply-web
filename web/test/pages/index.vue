@@ -1,5 +1,6 @@
 <template>
     <div class="main">
+        <img src="../src/webpack.png" alt="error"/>
         <router-view></router-view>
         <router-link to="/webpack">
             <el-button icon="el-icon-arrow-left" circle ></el-button>

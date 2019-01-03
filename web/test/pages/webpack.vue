@@ -1,6 +1,5 @@
 <template>
     <div>
-        <img src="@/src/webpack.png" alt="error"/>
         <el-button type="success" style="width:100%;" @click="centerDialogVisible = true">{{vueName}}</el-button>
         <el-dialog
             title="提示"

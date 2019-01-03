@@ -3,7 +3,7 @@ const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 exports.assetsPath = function (_path) {
-  return path.posix.join('../', _path)
+  return process.env.NODE_ENV === 'development' ?  _path : path.posix.join('../', _path)
 }
 
 exports.cssLoaders = function (options) {
