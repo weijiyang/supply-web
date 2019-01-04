@@ -28,7 +28,7 @@ module.exports = {
       path: path.resolve(__dirname, "../build", process.env.PROJECT, "js"),
       filename: "[name].build.js",
       publicPath: process.env.NODE_ENV === 'production'
-      ? 'http://yunshanmeicai.com/' : '/',
+      ? 'http://temp.com/' : '/',
     },
     resolve: {
       extensions: ['.js', '.vue', '.json'],
