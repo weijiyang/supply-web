@@ -4,6 +4,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const vueLoaderConfig = require('./vue-loader.config')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const HappyPack = require('happypack')
+const os = require('os')
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
+
 const utils = require('./utils')
 const package = require('../package')
 function resolve (dir) {
@@ -45,10 +49,15 @@ module.exports = {
           loader: 'vue-loader',
           options: vueLoaderConfig
         },
+        // {
+        //   test: /\.js$/,
+        //   loader: 'babel-loader',
+        //   include: [resolve('web')]
+        // },
         {
           test: /\.js$/,
-          loader: 'babel-loader',
-          include: [resolve('web')]
+          loader: 'happypack/loader?id=happyBabel',
+          exclude: /node_modules/
         },
         {
           test: /\.css$/,
@@ -111,6 +120,17 @@ module.exports = {
   },
     plugins: [
       new VueLoaderPlugin(),
+      new HappyPack({
+        id: 'happyBabel',
+        loaders: [{
+          loader: 'babel-loader',
+          options: {
+            plugins: ['syntax-dynamic-import']
+          }
+        }],
+        threadPool: happyThreadPool,
+        verbose: true
+      }),
       new CleanWebpackPlugin('build/*',{
         root: path.resolve(__dirname, '../')
       }),
