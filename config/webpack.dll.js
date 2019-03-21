@@ -21,6 +21,11 @@ module.exports = {
         library: '[name]'
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
         new CleanWebpackPlugin('dll/*.*', {
             root: path.resolve(__dirname, '../')
         }),
