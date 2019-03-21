@@ -1,6 +1,6 @@
 // 一个最基本的`webpack`配置文件
 const path = require('path')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+// const CleanWebpackPlugin = require('clean-webpack-plugin')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const vueLoaderConfig = require('./vue-loader.config')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
@@ -131,10 +131,10 @@ module.exports = {
         threadPool: happyThreadPool,
         verbose: true
       }),
-      new CleanWebpackPlugin('build/*',{
-        root: path.resolve(__dirname, '../'),
-        exclude:['dll.lib.js'],
-      }),
+      // new CleanWebpackPlugin('build/*',{
+      //   root: path.resolve(__dirname, '../'),
+      //   exclude:['dll.lib.js']
+      // }),
       new htmlWebpackPlugin({
         filename: process.env.NODE_ENV === 'production' ? '../../../index.html' : 'index.html',
         template: 'template.html',
