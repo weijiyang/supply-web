@@ -99,14 +99,14 @@ module.exports = {
     optimization: {
       splitChunks: {
         cacheGroups: {
-          test: {
-            name: 'async',
-            chunks: "async"
-          },
-          initial: {
-            chunks: "initial",
-            filename: "initial.bundle.js"
-          },
+          // test: {
+          //   name: 'async',
+          //   chunks: "async"
+          // },
+          // initial: {
+          //   chunks: "initial",
+          //   filename: "initial.bundle.js"
+          // },
           vender: {
             chunks: "all",
             test: /[\\/]node_modules[\\/]/,
@@ -132,7 +132,8 @@ module.exports = {
         verbose: true
       }),
       new CleanWebpackPlugin('build/*',{
-        root: path.resolve(__dirname, '../')
+        root: path.resolve(__dirname, '../'),
+        exclude:['dll.lib.js'],
       }),
       new htmlWebpackPlugin({
         filename: process.env.NODE_ENV === 'production' ? '../../../index.html' : 'index.html',

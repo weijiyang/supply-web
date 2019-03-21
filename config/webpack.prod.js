@@ -11,7 +11,7 @@ module.exports = merge(common, {
         manifest: require(path.resolve(__dirname,'../dll',"vender-manifest.json"))
       }),
       new HtmlWebpackIncludeAssetsPlugin({
-        assets: [path.posix.join(__dirname, '../build', process.env.PROJECT, 'js/vendor.dll.js')],
+        assets: [path.posix.join(__dirname, '../build', process.env.PROJECT, 'js/dll.lib.js')],
         hash: true,
         append: false
       })
