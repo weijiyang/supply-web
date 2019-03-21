@@ -5,12 +5,12 @@
   "main": "index.js",
   "project": "test",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --config config/webpack.dev.js --hide-modules --progress",
     "start": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress --open --quiet --config config/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js --hide-modules --progress",
     "dll": "webpack --config config/webpack.dll.js",
-    "op": "webpack --config config/webpack.optimization.js --hide-modules"
+    "op": "webpack --config config/webpack.optimization.js --hide-modules",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -35,6 +35,8 @@
     "babel-loader": "^7.1.5",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.2.0",
     "clean-webpack-plugin": "^1.0.0",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.0",
@@ -45,6 +47,7 @@
     "happypack": "^5.0.1",
     "html-webpack-include-assets-plugin": "^1.0.6",
     "html-webpack-plugin": "^3.2.0",
+    "mocha": "^6.0.2",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "speed-measure-webpack-plugin": "^1.2.5",

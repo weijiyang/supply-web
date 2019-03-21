@@ -1,0 +1,6 @@
+--reporter spec
+--recursive
+--growl
+--watch
+--timeout 10000
+--slow 1000
